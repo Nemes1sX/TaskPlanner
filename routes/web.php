@@ -16,8 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', 'login')->middleware('guest');
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::group(['middleware' => 'auth'], function () {
     Route::get('task/{task}/start', [App\Http\Controllers\TaskController::class, 'start'])->name('task.start')
         ->middleware('task.owner');
