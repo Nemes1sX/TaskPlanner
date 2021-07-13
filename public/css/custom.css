@@ -1,0 +1,17 @@
+.actions {
+    padding-right: 10px;
+}
+.alert-box {
+    margin: 0 auto;
+}
+.center-table {
+    margin-left: auto;
+    margin-right: auto;
+}
+.delete {
+    border-style: none;
+    background: none;
+}
+.tasks {
+    max-width: 1000px;
+}
