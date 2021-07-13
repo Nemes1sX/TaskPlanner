@@ -11,6 +11,12 @@ use Illuminate\Http\RedirectResponse;
 
 class TaskController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Task::class, 'task');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -65,7 +71,7 @@ class TaskController extends Controller
      */
     public function edit(Task $task) : View
     {
-        return view('task.edit', compact('task'));
+        return view('tasks.edit', compact('task'));
     }
 
     /**
@@ -100,6 +106,8 @@ class TaskController extends Controller
         if (!$task->start_time) {
            $task->start_time = Carbon::now();
         }
+        $task->session_start_time = Carbon::now();
+        $task->end_time = null;
         $task->status = true;
         $task->save();
 
@@ -108,8 +116,9 @@ class TaskController extends Controller
 
     public function stop(Task $task) : RedirectResponse
     {
-        $task->end_time = Carbon::now();
         $task->status = false;
+        $task->spent_time = $task->timeSpent();
+        $task->end_time = Carbon::now();
         $task->save();
 
         return redirect()->back()->with('message', 'Task was stopped');

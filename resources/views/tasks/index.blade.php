@@ -5,14 +5,17 @@
         <div class="pull-left">
             <h2 class="text-center">User tasks</h2>
         </div>
+        <p style="text-align: center">
+        <a class=" btn btn-success" href="{{route('task.create')}}">Create task</a>
+        </p>
         @if($message = Session::get('success'))
             <div class="alert col-lg-9 alert-success alert-box templates">
                 <p class="text-center">{{ $message }}</p>
             </div>
         @endif
     </div>
-    <div class="col-lg-8 col-md-8 center-table">
-        <table class="table table-bordered table-responsive-lg table-responsive-md tasks">
+    <div class="col-lg-8 col-md-8 center-table tasks">
+        <table class="table table-bordered table-responsive-lg table-responsive-md">
             <thead>
             <tr>
                 <th>Name</th>
@@ -26,7 +29,13 @@
             <tr>
                 <td>{{ $task->name }}</td>
                 <td>{{ $task->description }}</td>
-                <td>{{ $task->timeSpent()  }} {{__('minutes')}}</td>
+                <td>
+                @if (!$task->start_time && !$task->end_time)
+                   -
+                @else
+                        {{ $task->timeSpent()  }} {{__('minutes')}}
+                @endif
+                </td>
                 <td>
                     <div class="input-group">
                         <a class="actions" href="{{route('task.show', $task)}}">

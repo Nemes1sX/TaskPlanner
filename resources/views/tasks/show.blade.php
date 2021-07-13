@@ -16,21 +16,33 @@
                             <strong>Description:</strong>
                             <p>{{$task->description}}</p>
                             <strong>Creation date:</strong>
-                            <p>{{$task->created_date}}</p>
+                            <p>{{$task->created_at->format('Y-m-d H:i')}}</p>
                             <strong>Task starting time</strong>
                             @if ($task->start_time)
                                 <p>{{$task->start_time->format('Y-m-d H:i')}}</p>
                             @else
                                 <p>-</p>
                             @endif
+                            <strong>Current task session start time</strong>
+                            @if ($task->session_start_time)
+                                <p>{{$task->session_start_time->format('Y-m-d H:i')}}</p>
+                            @else
+                                <p>-</p>
+                            @endif
                             <strong>Task stoppage time</strong>
-                            @if ($task->start_time)
+                            @if ($task->end_time)
                                 <p>{{$task->end_time->format('Y-m-d H:i')}}</p>
                             @else
                                 <p>-</p>
                             @endif
                             <strong>Spent time</strong>
-                            <p>{{$task->timeSpent()}} minutes</p>
+                            <p>
+                                @if ($task->start_time)
+                                    {{$task->timeSpent()}} minutes
+                                @else
+                                    0 minutes
+                                @endif
+                            </p>
                         </div>
                         <div class="card-footer">
                             @if (!$task->status)
@@ -38,6 +50,7 @@
                             @else
                                 <a class="btn btn-danger" href="{{route('task.stop', $task)}}">Stop task</a>
                             @endif
+                            <a class="btn btn-primary" href="{{route('task.index')}}">Back to list</a>
                         </div>
                 </div>
             </div>

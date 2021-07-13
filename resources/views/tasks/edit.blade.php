@@ -30,6 +30,7 @@
                     </div>
                     <div class="card-footer">
                         <button class="btn btn-sm btn-primary">{{__('Save')}}</button>
+                        <a class="btn btn-sm btn-danger" href="{{route('task.index')}}">{{__('Back to list')}}</a>
                     </div>
                     </form>
                 </div>
