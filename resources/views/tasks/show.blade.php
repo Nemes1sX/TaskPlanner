@@ -37,8 +37,10 @@
                             @endif
                             <strong>Spent time</strong>
                             <p>
-                                @if ($task->start_time)
-                                    {{$task->timeSpent()}} minutes
+                                @if ($task->start_time && !$task->end_time)
+                                    {{$task->spent_time + $task->timeSpent()}} minutes
+                                @elseif ($task->start_time && $task->end_time)
+                                    {{$task->spent_time}} minutes
                                 @else
                                     0 minutes
                                 @endif

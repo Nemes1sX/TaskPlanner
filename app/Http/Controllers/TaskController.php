@@ -117,8 +117,8 @@ class TaskController extends Controller
     public function stop(Task $task) : RedirectResponse
     {
         $task->status = false;
-        $task->spent_time = $task->timeSpent();
         $task->end_time = Carbon::now();
+        $task->spent_time += $task->timeSpent();
         $task->save();
 
         return redirect()->back()->with('message', 'Task was stopped');

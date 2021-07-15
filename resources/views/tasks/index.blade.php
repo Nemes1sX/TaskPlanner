@@ -30,11 +30,13 @@
                 <td>{{ $task->name }}</td>
                 <td>{{ $task->description }}</td>
                 <td>
-                @if (!$task->start_time && !$task->end_time)
-                   -
-                @else
-                        {{ $task->timeSpent()  }} {{__('minutes')}}
-                @endif
+                    @if ($task->start_time && !$task->end_time)
+                        {{$task->spent_time + $task->timeSpent()}} minutes
+                    @elseif ($task->start_time && $task->end_time)
+                        {{$task->spent_time}} minutes
+                    @else
+                        0 minutes
+                    @endif
                 </td>
                 <td>
                     <div class="input-group">

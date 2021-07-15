@@ -17,8 +17,8 @@ class Task extends Model
     public function timeSpent()
     {
         return $this->end_time ?
-        Carbon::createFromTimestamp(strtotime($this->session_start_time))->diff($this->end_time)->i + $this->spent_time
-        : Carbon::createFromTimestamp(strtotime($this->session_start_time))->diff(Carbon::now())->i + $this->spent_time;
+        Carbon::createFromTimestamp(strtotime($this->session_start_time))->diff($this->end_time)->i
+        : Carbon::createFromTimestamp(strtotime($this->session_start_time))->diff(Carbon::now())->i;
     }
 
     public function user()
