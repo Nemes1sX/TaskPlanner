@@ -1,4 +1,8 @@
 # Task Planner
+System which logs time for tasks. Built in Laravel 8.
+## Functionality 
+1. User can create tasks and log time for them
+2. User only can access only their created tasks
 ## Installation instructions. For both enviromentns
 -  Clone the repository with ```git clone```
 ### Windows localhost
